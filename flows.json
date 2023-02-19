@@ -1,0 +1,851 @@
+[
+    {
+        "id": "6cbfdc66b09951e8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9af9f5e6a558987d",
+        "type": "telegram bot",
+        "botname": "Sazed",
+        "usernames": "",
+        "chatids": "203007605",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksprotocol": "socks5",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "a3d5094020b1387e",
+        "type": "telegram command",
+        "z": "6cbfdc66b09951e8",
+        "name": "List Resources",
+        "command": "/list_resources",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "9af9f5e6a558987d",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 160,
+        "y": 160,
+        "wires": [
+            [
+                "a207acce653642e5",
+                "51501a27662c9a0f"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "853c9ce6261dc144",
+        "type": "exec",
+        "z": "6cbfdc66b09951e8",
+        "command": "ls /downloads",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "ls resources",
+        "x": 710,
+        "y": 160,
+        "wires": [
+            [
+                "6a05255daf1c4c60",
+                "1e73014ad86b4b9f"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "6a05255daf1c4c60",
+        "type": "function",
+        "z": "6cbfdc66b09951e8",
+        "name": "function 2",
+        "func": "let response = {}\n\nresponse.payload = {\n    \"content\": msg.payload,\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId')\n}\n\nreturn response;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 140,
+        "wires": [
+            [
+                "37e03dd8d78cb485"
+            ]
+        ]
+    },
+    {
+        "id": "37e03dd8d78cb485",
+        "type": "telegram sender",
+        "z": "6cbfdc66b09951e8",
+        "name": "Response",
+        "bot": "9af9f5e6a558987d",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1380,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "31304615e760d107",
+        "type": "inject",
+        "z": "6cbfdc66b09951e8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"chatId\": 203007605, \"messageId\": 38, \"type\": \"message\", \"content\": \"\"}",
+        "payloadType": "json",
+        "x": 170,
+        "y": 240,
+        "wires": [
+            [
+                "a207acce653642e5"
+            ]
+        ]
+    },
+    {
+        "id": "a207acce653642e5",
+        "type": "function",
+        "z": "6cbfdc66b09951e8",
+        "name": "function 3",
+        "func": "flow.set('chatId', msg.payload.chatId)\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 160,
+        "wires": [
+            [
+                "853c9ce6261dc144"
+            ]
+        ]
+    },
+    {
+        "id": "51501a27662c9a0f",
+        "type": "debug",
+        "z": "6cbfdc66b09951e8",
+        "name": "telegram",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "54fd717913c895c9",
+        "type": "inject",
+        "z": "6cbfdc66b09951e8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"msg\":{\"payload\":{\"content\":\"Elija mendrugo\",\"type\":\"message\",\"chatId\":203007605,\"options\":[[\"prueba\",\"mimi\"]]}}}",
+        "payloadType": "json",
+        "x": 1210,
+        "y": 40,
+        "wires": [
+            [
+                "37e03dd8d78cb485"
+            ]
+        ]
+    },
+    {
+        "id": "0fb3d994f3b7b21a",
+        "type": "telegram command",
+        "z": "6cbfdc66b09951e8",
+        "name": "Download resource",
+        "command": "/download_resource",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "9af9f5e6a558987d",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 170,
+        "y": 360,
+        "wires": [
+            [
+                "07293d5355fb1216"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "c889df91ef6fa488",
+        "type": "telegram sender",
+        "z": "6cbfdc66b09951e8",
+        "name": "",
+        "bot": "9af9f5e6a558987d",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 710,
+        "y": 360,
+        "wires": [
+            [
+                "af512362318c3b0d",
+                "da25fb7119ce9e5f"
+            ]
+        ]
+    },
+    {
+        "id": "07293d5355fb1216",
+        "type": "function",
+        "z": "6cbfdc66b09951e8",
+        "name": "function 4",
+        "func": "flow.set('chatId', msg.payload.chatId)\nlet response = {}\nlet options = {\n    reply_to_message_id: msg.payload.messageId\n}\n\nresponse.payload = {\n    \"content\": \"Que URL debo descargar\",\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId'),\n    \"options\": options\n}\n\nreturn response;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 360,
+        "wires": [
+            [
+                "c889df91ef6fa488"
+            ]
+        ]
+    },
+    {
+        "id": "af512362318c3b0d",
+        "type": "telegram reply",
+        "z": "6cbfdc66b09951e8",
+        "name": "",
+        "bot": "9af9f5e6a558987d",
+        "x": 960,
+        "y": 360,
+        "wires": [
+            [
+                "4bd8dad9db0ceaf7",
+                "31bb4228623ffd75"
+            ]
+        ]
+    },
+    {
+        "id": "da25fb7119ce9e5f",
+        "type": "debug",
+        "z": "6cbfdc66b09951e8",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "4bd8dad9db0ceaf7",
+        "type": "debug",
+        "z": "6cbfdc66b09951e8",
+        "name": "debug 2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1120,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "31bb4228623ffd75",
+        "type": "function",
+        "z": "6cbfdc66b09951e8",
+        "name": "function 5",
+        "func": "flow.set('downloadUrl', msg.payload.content)\nlet response = {}\nlet options = {\n    reply_to_message_id: msg.payload.messageId\n}\n\nresponse.payload = {\n    \"content\": \"Que nombre desea para grabarlo en la placa de acero\",\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId'),\n    \"options\": options\n}\n\nreturn response;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1200,
+        "y": 360,
+        "wires": [
+            [
+                "eeb17e5d08cf0d90"
+            ]
+        ]
+    },
+    {
+        "id": "eeb17e5d08cf0d90",
+        "type": "telegram sender",
+        "z": "6cbfdc66b09951e8",
+        "name": "",
+        "bot": "9af9f5e6a558987d",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 710,
+        "y": 460,
+        "wires": [
+            [
+                "4e01c518ae160230"
+            ]
+        ]
+    },
+    {
+        "id": "4e01c518ae160230",
+        "type": "telegram reply",
+        "z": "6cbfdc66b09951e8",
+        "name": "",
+        "bot": "9af9f5e6a558987d",
+        "x": 960,
+        "y": 460,
+        "wires": [
+            [
+                "495d53dca862ffb0"
+            ]
+        ]
+    },
+    {
+        "id": "495d53dca862ffb0",
+        "type": "function",
+        "z": "6cbfdc66b09951e8",
+        "name": "function 6",
+        "func": "let downloadUrl = flow.get('downloadUrl')\nlet filename = msg.payload.content\nlet response = {}\n\nresponse.payload = `${downloadUrl} -o /downloads/${filename}`\n\nreturn response;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1200,
+        "y": 460,
+        "wires": [
+            [
+                "1e373950995246a1",
+                "21145d3738f07fa6"
+            ]
+        ]
+    },
+    {
+        "id": "1e373950995246a1",
+        "type": "debug",
+        "z": "6cbfdc66b09951e8",
+        "name": "debug 3",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1420,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "21145d3738f07fa6",
+        "type": "exec",
+        "z": "6cbfdc66b09951e8",
+        "command": "curl",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "curl custom url",
+        "x": 1420,
+        "y": 460,
+        "wires": [
+            [
+                "295285e1bfb4f18c",
+                "bbde556239dd6660"
+            ],
+            [
+                "da82bf2af2dcd08b"
+            ],
+            [
+                "da82bf2af2dcd08b"
+            ]
+        ]
+    },
+    {
+        "id": "295285e1bfb4f18c",
+        "type": "debug",
+        "z": "6cbfdc66b09951e8",
+        "name": "debug 4",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1660,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "da82bf2af2dcd08b",
+        "type": "debug",
+        "z": "6cbfdc66b09951e8",
+        "name": "debug 5",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1620,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "1289640412b236aa",
+        "type": "telegram sender",
+        "z": "6cbfdc66b09951e8",
+        "name": "Response",
+        "bot": "9af9f5e6a558987d",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1960,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bbde556239dd6660",
+        "type": "function",
+        "z": "6cbfdc66b09951e8",
+        "name": "function 7",
+        "func": "let response = {}\n\nresponse.payload = {\n    \"content\": \"URL grabada\",\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId')\n}\n\nreturn response;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1660,
+        "y": 440,
+        "wires": [
+            [
+                "1289640412b236aa"
+            ]
+        ]
+    },
+    {
+        "id": "4be79243ef951e14",
+        "type": "function",
+        "z": "6cbfdc66b09951e8",
+        "name": "Create Keyboard",
+        "func": "let files = msg.payload\nlet response = {}\n\nfiles = files.split('\\n')\nfiles.pop()\nlet definitiveFiles = []\nfor (let file of files) {\n    definitiveFiles.push([file])\n}\nvar options = {\n    parse_mode: \"MarkdownV2\",\n    reply_markup: JSON.stringify({\n        keyboard: definitiveFiles,\n        'resize_keyboard': true,\n        'one_time_keyboard': true\n    })\n};\n\nresponse.payload = {\n    \"content\": \"*Responda a este mensaje* Cual quieres borrar\",\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId'),\n    \"options\": options\n}\n\nreturn response;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 700,
+        "wires": [
+            [
+                "a5b9328e4f258739"
+            ]
+        ]
+    },
+    {
+        "id": "a5b9328e4f258739",
+        "type": "telegram sender",
+        "z": "6cbfdc66b09951e8",
+        "name": "Response",
+        "bot": "9af9f5e6a558987d",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1180,
+        "y": 700,
+        "wires": [
+            [
+                "2568ce883dc0deec"
+            ]
+        ]
+    },
+    {
+        "id": "1e73014ad86b4b9f",
+        "type": "debug",
+        "z": "6cbfdc66b09951e8",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "6348bd5849289d7c",
+        "type": "telegram command",
+        "z": "6cbfdc66b09951e8",
+        "name": "Remove Resources",
+        "command": "/remove_resource",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "9af9f5e6a558987d",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 210,
+        "y": 700,
+        "wires": [
+            [
+                "48ba230cedfc63f3"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "6ebf2d3bdc520aaa",
+        "type": "exec",
+        "z": "6cbfdc66b09951e8",
+        "command": "ls /downloads",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "ls resources",
+        "x": 690,
+        "y": 700,
+        "wires": [
+            [
+                "4be79243ef951e14"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "48ba230cedfc63f3",
+        "type": "function",
+        "z": "6cbfdc66b09951e8",
+        "name": "Save ChatId",
+        "func": "flow.set('chatId', msg.payload.chatId)\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 700,
+        "wires": [
+            [
+                "6ebf2d3bdc520aaa"
+            ]
+        ]
+    },
+    {
+        "id": "2568ce883dc0deec",
+        "type": "telegram reply",
+        "z": "6cbfdc66b09951e8",
+        "name": "",
+        "bot": "9af9f5e6a558987d",
+        "x": 1360,
+        "y": 700,
+        "wires": [
+            [
+                "05d6aa4894f620e0"
+            ]
+        ]
+    },
+    {
+        "id": "05d6aa4894f620e0",
+        "type": "function",
+        "z": "6cbfdc66b09951e8",
+        "name": "Create resource path",
+        "func": "let response = {}\nlet filename = msg.payload.content\n\nresponse.payload = `/downloads/${filename}`\n\nreturn response;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1580,
+        "y": 700,
+        "wires": [
+            [
+                "0a6347f5ca4c3236"
+            ]
+        ]
+    },
+    {
+        "id": "0a6347f5ca4c3236",
+        "type": "exec",
+        "z": "6cbfdc66b09951e8",
+        "command": "rm",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "rm resource",
+        "x": 1790,
+        "y": 700,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "74799fad3a52a466",
+        "type": "telegram command",
+        "z": "6cbfdc66b09951e8",
+        "name": "Test",
+        "command": "/test",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "9af9f5e6a558987d",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 170,
+        "y": 820,
+        "wires": [
+            [
+                "6e3b962e7324eefb",
+                "24bd0e0bb05d319a"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "13dbc394c7788c4c",
+        "type": "function",
+        "z": "6cbfdc66b09951e8",
+        "name": "Example remove keyboard",
+        "func": "\nlet response = {}\n\nlet definitiveFiles = []\n\nvar options = {\n    parse_mode: \"MarkdownV2\",\n    reply_markup: JSON.stringify({\n        keyboard: definitiveFiles,\n        remove_keyboard: true\n    })\n};\n\nresponse.payload = {\n    \"content\": \"*Prueba*\",\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId'),\n    \"options\": options\n}\n\nreturn response;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1460,
+        "y": 880,
+        "wires": [
+            [
+                "1c892d71830aefda"
+            ]
+        ]
+    },
+    {
+        "id": "bdaf392f34f30afc",
+        "type": "telegram sender",
+        "z": "6cbfdc66b09951e8",
+        "name": "",
+        "bot": "9af9f5e6a558987d",
+        "haserroroutput": true,
+        "outputs": 2,
+        "x": 630,
+        "y": 820,
+        "wires": [
+            [
+                "d4285faecbc1a7e9",
+                "98644e9152e2b056"
+            ],
+            [
+                "49309a0372f7f4b5"
+            ]
+        ]
+    },
+    {
+        "id": "6e3b962e7324eefb",
+        "type": "function",
+        "z": "6cbfdc66b09951e8",
+        "name": "function 8",
+        "func": "flow.set('chatId', msg.payload.chatId)\nlet response = {}\nlet options = {\n    reply_to_message_id: msg.payload.messageId,\n    \"reply_markup\": {\n        \"force_reply\": true\n    }\n}\n\nresponse.payload = {\n    \"content\": \"Que URL debo descargar\",\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId'),\n    \"options\": options\n}\n\nreturn response;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 820,
+        "wires": [
+            [
+                "bdaf392f34f30afc",
+                "dd0368d05a770c0a"
+            ]
+        ]
+    },
+    {
+        "id": "d4285faecbc1a7e9",
+        "type": "telegram reply",
+        "z": "6cbfdc66b09951e8",
+        "name": "",
+        "bot": "9af9f5e6a558987d",
+        "x": 880,
+        "y": 820,
+        "wires": [
+            [
+                "6820436733b24974"
+            ]
+        ]
+    },
+    {
+        "id": "1c892d71830aefda",
+        "type": "telegram sender",
+        "z": "6cbfdc66b09951e8",
+        "name": "Empty Keyboard",
+        "bot": "9af9f5e6a558987d",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1690,
+        "y": 880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "98644e9152e2b056",
+        "type": "debug",
+        "z": "6cbfdc66b09951e8",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "6820436733b24974",
+        "type": "debug",
+        "z": "6cbfdc66b09951e8",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1060,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "dd0368d05a770c0a",
+        "type": "debug",
+        "z": "6cbfdc66b09951e8",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "24bd0e0bb05d319a",
+        "type": "debug",
+        "z": "6cbfdc66b09951e8",
+        "name": "debug 12",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 320,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "49309a0372f7f4b5",
+        "type": "debug",
+        "z": "6cbfdc66b09951e8",
+        "name": "debug 13",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 900,
+        "wires": []
+    }
+]
