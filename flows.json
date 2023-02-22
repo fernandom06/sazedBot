@@ -460,8 +460,8 @@
         "bot": "9af9f5e6a558987d",
         "haserroroutput": false,
         "outputs": 1,
-        "x": 1960,
-        "y": 420,
+        "x": 1900,
+        "y": 440,
         "wires": [
             []
         ]
@@ -496,7 +496,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 910,
+        "x": 730,
         "y": 700,
         "wires": [
             [
@@ -508,11 +508,11 @@
         "id": "a5b9328e4f258739",
         "type": "telegram sender",
         "z": "6cbfdc66b09951e8",
-        "name": "Response",
+        "name": "Cual quiere borrar",
         "bot": "9af9f5e6a558987d",
         "haserroroutput": false,
         "outputs": 1,
-        "x": 1180,
+        "x": 930,
         "y": 700,
         "wires": [
             [
@@ -573,7 +573,7 @@
         "winHide": false,
         "oldrc": false,
         "name": "ls resources",
-        "x": 690,
+        "x": 550,
         "y": 700,
         "wires": [
             [
@@ -594,7 +594,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 460,
+        "x": 390,
         "y": 700,
         "wires": [
             [
@@ -606,9 +606,9 @@
         "id": "2568ce883dc0deec",
         "type": "telegram reply",
         "z": "6cbfdc66b09951e8",
-        "name": "",
+        "name": "User Response",
         "bot": "9af9f5e6a558987d",
-        "x": 1360,
+        "x": 1120,
         "y": 700,
         "wires": [
             [
@@ -627,7 +627,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1580,
+        "x": 1320,
         "y": 700,
         "wires": [
             [
@@ -647,10 +647,12 @@
         "winHide": false,
         "oldrc": false,
         "name": "rm resource",
-        "x": 1790,
+        "x": 1510,
         "y": 700,
         "wires": [
-            [],
+            [
+                "500a6a64abd1cb78"
+            ],
             [],
             []
         ]
@@ -675,8 +677,7 @@
         "y": 820,
         "wires": [
             [
-                "6e3b962e7324eefb",
-                "24bd0e0bb05d319a"
+                "6e3b962e7324eefb"
             ],
             []
         ]
@@ -712,12 +713,9 @@
         "y": 820,
         "wires": [
             [
-                "d4285faecbc1a7e9",
-                "98644e9152e2b056"
+                "d4285faecbc1a7e9"
             ],
-            [
-                "49309a0372f7f4b5"
-            ]
+            []
         ]
     },
     {
@@ -735,8 +733,7 @@
         "y": 820,
         "wires": [
             [
-                "bdaf392f34f30afc",
-                "dd0368d05a770c0a"
+                "bdaf392f34f30afc"
             ]
         ]
     },
@@ -749,9 +746,7 @@
         "x": 880,
         "y": 820,
         "wires": [
-            [
-                "6820436733b24974"
-            ]
+            []
         ]
     },
     {
@@ -769,83 +764,36 @@
         ]
     },
     {
-        "id": "98644e9152e2b056",
-        "type": "debug",
+        "id": "500a6a64abd1cb78",
+        "type": "function",
         "z": "6cbfdc66b09951e8",
-        "name": "debug 8",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 840,
-        "y": 780,
-        "wires": []
+        "name": "Borrar el teclado",
+        "func": "let response = {}\nlet options = {\n    reply_markup: {\n        remove_keyboard: true\n    }\n};\n\nresponse.payload = {\n    \"content\": \"Recurso borrado\",\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId'),\n    \"options\": options\n}\n\nreturn response;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1680,
+        "y": 700,
+        "wires": [
+            [
+                "958fa129d6457920"
+            ]
+        ]
     },
     {
-        "id": "6820436733b24974",
-        "type": "debug",
+        "id": "958fa129d6457920",
+        "type": "telegram sender",
         "z": "6cbfdc66b09951e8",
-        "name": "debug 9",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1060,
-        "y": 780,
-        "wires": []
-    },
-    {
-        "id": "dd0368d05a770c0a",
-        "type": "debug",
-        "z": "6cbfdc66b09951e8",
-        "name": "debug 10",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 520,
-        "y": 780,
-        "wires": []
-    },
-    {
-        "id": "24bd0e0bb05d319a",
-        "type": "debug",
-        "z": "6cbfdc66b09951e8",
-        "name": "debug 12",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 320,
-        "y": 780,
-        "wires": []
-    },
-    {
-        "id": "49309a0372f7f4b5",
-        "type": "debug",
-        "z": "6cbfdc66b09951e8",
-        "name": "debug 13",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 800,
-        "y": 900,
-        "wires": []
+        "name": "Borrar teclado",
+        "bot": "9af9f5e6a558987d",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1860,
+        "y": 700,
+        "wires": [
+            []
+        ]
     }
 ]
