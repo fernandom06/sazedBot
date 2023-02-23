@@ -233,12 +233,11 @@
         "bot": "9af9f5e6a558987d",
         "haserroroutput": false,
         "outputs": 1,
-        "x": 710,
+        "x": 690,
         "y": 360,
         "wires": [
             [
-                "af512362318c3b0d",
-                "da25fb7119ce9e5f"
+                "af512362318c3b0d"
             ]
         ]
     },
@@ -246,14 +245,14 @@
         "id": "07293d5355fb1216",
         "type": "function",
         "z": "6cbfdc66b09951e8",
-        "name": "function 4",
-        "func": "flow.set('chatId', msg.payload.chatId)\nlet response = {}\nlet options = {\n    reply_to_message_id: msg.payload.messageId\n}\n\nresponse.payload = {\n    \"content\": \"Que URL debo descargar\",\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId'),\n    \"options\": options\n}\n\nreturn response;",
+        "name": "Message: Url to Download",
+        "func": "flow.set('chatId', msg.payload.chatId)\nlet response = {}\nlet options = {\n    parse_mode: \"MarkdownV2\",\n    reply_markup: {\n        force_reply: true\n    }\n}\n\nresponse.payload = {\n    \"content\": \"*Responda a este mensaje* Que URL debo descargar\",\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId'),\n    \"options\": options\n}\n\nreturn response;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 400,
+        "x": 460,
         "y": 360,
         "wires": [
             [
@@ -265,61 +264,28 @@
         "id": "af512362318c3b0d",
         "type": "telegram reply",
         "z": "6cbfdc66b09951e8",
-        "name": "",
+        "name": "User Response",
         "bot": "9af9f5e6a558987d",
-        "x": 960,
+        "x": 880,
         "y": 360,
         "wires": [
             [
-                "4bd8dad9db0ceaf7",
                 "31bb4228623ffd75"
             ]
         ]
     },
     {
-        "id": "da25fb7119ce9e5f",
-        "type": "debug",
-        "z": "6cbfdc66b09951e8",
-        "name": "debug 1",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 900,
-        "y": 280,
-        "wires": []
-    },
-    {
-        "id": "4bd8dad9db0ceaf7",
-        "type": "debug",
-        "z": "6cbfdc66b09951e8",
-        "name": "debug 2",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1120,
-        "y": 280,
-        "wires": []
-    },
-    {
         "id": "31bb4228623ffd75",
         "type": "function",
         "z": "6cbfdc66b09951e8",
-        "name": "function 5",
-        "func": "flow.set('downloadUrl', msg.payload.content)\nlet response = {}\nlet options = {\n    reply_to_message_id: msg.payload.messageId\n}\n\nresponse.payload = {\n    \"content\": \"Que nombre desea para grabarlo en la placa de acero\",\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId'),\n    \"options\": options\n}\n\nreturn response;",
+        "name": "Name to save doc",
+        "func": "flow.set('downloadUrl', msg.payload.content)\nlet response = {}\nlet options = {\n    parse_mode: \"MarkdownV2\",\n    reply_markup: {\n        force_reply: true\n    }\n}\n\nresponse.payload = {\n    \"content\": \"*Responda a este mensaje* Que nombre desea para grabarlo en la placa de acero\",\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId'),\n    \"options\": options\n}\n\nreturn response;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1200,
+        "x": 1070,
         "y": 360,
         "wires": [
             [
@@ -336,7 +302,7 @@
         "haserroroutput": false,
         "outputs": 1,
         "x": 710,
-        "y": 460,
+        "y": 420,
         "wires": [
             [
                 "4e01c518ae160230"
@@ -347,13 +313,13 @@
         "id": "4e01c518ae160230",
         "type": "telegram reply",
         "z": "6cbfdc66b09951e8",
-        "name": "",
+        "name": "User Response",
         "bot": "9af9f5e6a558987d",
-        "x": 960,
-        "y": 460,
+        "x": 900,
+        "y": 420,
         "wires": [
             [
-                "495d53dca862ffb0"
+                "536fbb5712e225cc"
             ]
         ]
     },
@@ -361,37 +327,20 @@
         "id": "495d53dca862ffb0",
         "type": "function",
         "z": "6cbfdc66b09951e8",
-        "name": "function 6",
-        "func": "let downloadUrl = flow.get('downloadUrl')\nlet filename = msg.payload.content\nlet response = {}\n\nresponse.payload = `${downloadUrl} -o /downloads/${filename}`\n\nreturn response;",
+        "name": "Create command",
+        "func": "let downloadUrl = flow.get('downloadUrl')\nlet filename = flow.get('filename')\nlet response = {}\n\nresponse.payload = `${downloadUrl} -o /downloads/${filename}`\n\nreturn response;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1200,
-        "y": 460,
+        "x": 690,
+        "y": 500,
         "wires": [
             [
-                "1e373950995246a1",
                 "21145d3738f07fa6"
             ]
         ]
-    },
-    {
-        "id": "1e373950995246a1",
-        "type": "debug",
-        "z": "6cbfdc66b09951e8",
-        "name": "debug 3",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1420,
-        "y": 380,
-        "wires": []
     },
     {
         "id": "21145d3738f07fa6",
@@ -405,52 +354,15 @@
         "winHide": false,
         "oldrc": false,
         "name": "curl custom url",
-        "x": 1420,
-        "y": 460,
+        "x": 900,
+        "y": 500,
         "wires": [
             [
-                "295285e1bfb4f18c",
                 "bbde556239dd6660"
             ],
-            [
-                "da82bf2af2dcd08b"
-            ],
-            [
-                "da82bf2af2dcd08b"
-            ]
+            [],
+            []
         ]
-    },
-    {
-        "id": "295285e1bfb4f18c",
-        "type": "debug",
-        "z": "6cbfdc66b09951e8",
-        "name": "debug 4",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1660,
-        "y": 360,
-        "wires": []
-    },
-    {
-        "id": "da82bf2af2dcd08b",
-        "type": "debug",
-        "z": "6cbfdc66b09951e8",
-        "name": "debug 5",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1620,
-        "y": 480,
-        "wires": []
     },
     {
         "id": "1289640412b236aa",
@@ -460,8 +372,8 @@
         "bot": "9af9f5e6a558987d",
         "haserroroutput": false,
         "outputs": 1,
-        "x": 1900,
-        "y": 440,
+        "x": 1220,
+        "y": 480,
         "wires": [
             []
         ]
@@ -470,15 +382,15 @@
         "id": "bbde556239dd6660",
         "type": "function",
         "z": "6cbfdc66b09951e8",
-        "name": "function 7",
-        "func": "let response = {}\n\nresponse.payload = {\n    \"content\": \"URL grabada\",\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId')\n}\n\nreturn response;",
+        "name": "Correct exit",
+        "func": "let response = {}\nlet filename = flow.get('filename')\n\nlet options = {\n    parse_mode: \"MarkdownV2\"\n}\n\nresponse.payload = {\n    \"content\": \"La placa *\"+ filename +\"* ha sido grabada correctamente\",\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId'),\n    \"options\": options\n}\n\nreturn response;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1660,
-        "y": 440,
+        "x": 1070,
+        "y": 480,
         "wires": [
             [
                 "1289640412b236aa"
@@ -490,7 +402,7 @@
         "type": "function",
         "z": "6cbfdc66b09951e8",
         "name": "Create Keyboard",
-        "func": "let files = msg.payload\nlet response = {}\n\nfiles = files.split('\\n')\nfiles.pop()\nlet definitiveFiles = []\nfor (let file of files) {\n    definitiveFiles.push([file])\n}\nvar options = {\n    parse_mode: \"MarkdownV2\",\n    reply_markup: JSON.stringify({\n        keyboard: definitiveFiles,\n        'resize_keyboard': true,\n        'one_time_keyboard': true\n    })\n};\n\nresponse.payload = {\n    \"content\": \"*Responda a este mensaje* Cual quieres borrar\",\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId'),\n    \"options\": options\n}\n\nreturn response;",
+        "func": "let files = msg.payload\nlet response = {}\n\nfiles = files.split('\\n')\nfiles.pop()\nlet definitiveFiles = []\nfor (let file of files) {\n    definitiveFiles.push([file])\n}\nvar options = {\n    parse_mode: \"MarkdownV2\",\n    reply_markup: {\n        force_reply: true,\n        keyboard: definitiveFiles,\n        //resize_keyboard: true,\n        //one_time_keyboard: true\n    }\n};\n\nresponse.payload = {\n    \"content\": \"*Responda a este mensaje* Cual quieres borrar\",\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId'),\n    \"options\": options\n}\n\nreturn response;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -768,7 +680,7 @@
         "type": "function",
         "z": "6cbfdc66b09951e8",
         "name": "Borrar el teclado",
-        "func": "let response = {}\nlet options = {\n    reply_markup: {\n        remove_keyboard: true\n    }\n};\n\nresponse.payload = {\n    \"content\": \"Recurso borrado\",\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId'),\n    \"options\": options\n}\n\nreturn response;",
+        "func": "let response = {}\nlet options = {\n    parse_mode: \"MarkdownV2\",\n    reply_markup: {\n        remove_keyboard: true\n    }\n};\n\nresponse.payload = {\n    \"content\": \"*Recurso borrado*\",\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId'),\n    \"options\": options\n}\n\nreturn response;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -794,6 +706,51 @@
         "y": 700,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "be1e7f01392847ac",
+        "type": "comment",
+        "z": "6cbfdc66b09951e8",
+        "name": "ReplyForce y Keyboard",
+        "info": "No se pueden hacer un mensaje que fuerce la respuesta y monte un keyboard, hay que ver opciones, dos mensajes con texto, un mensaje con texto tonto y despues editarlo o algo asi",
+        "x": 1340,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "536fbb5712e225cc",
+        "type": "function",
+        "z": "6cbfdc66b09951e8",
+        "name": "Downloading response",
+        "func": "flow.set('filename', msg.payload.content)\nlet filename = msg.payload.content;\nlet content = \"Grabando la placa *\" + filename + \"*\";\nlet response = {}\nlet options = {\n    parse_mode: \"MarkdownV2\",\n}\n\nresponse.payload = {\n    \"content\": content,\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId'),\n    \"options\": options\n}\n\nreturn response;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1100,
+        "y": 420,
+        "wires": [
+            [
+                "fdd5ec1118a25948"
+            ]
+        ]
+    },
+    {
+        "id": "fdd5ec1118a25948",
+        "type": "telegram sender",
+        "z": "6cbfdc66b09951e8",
+        "name": "",
+        "bot": "9af9f5e6a558987d",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1310,
+        "y": 420,
+        "wires": [
+            [
+                "495d53dca862ffb0"
+            ]
         ]
     }
 ]
