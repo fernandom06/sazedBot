@@ -70,8 +70,8 @@
         "winHide": false,
         "oldrc": false,
         "name": "ls resources",
-        "x": 710,
-        "y": 160,
+        "x": 490,
+        "y": 180,
         "wires": [
             [
                 "6a05255daf1c4c60",
@@ -92,8 +92,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1020,
-        "y": 140,
+        "x": 660,
+        "y": 200,
         "wires": [
             [
                 "37e03dd8d78cb485"
@@ -108,8 +108,8 @@
         "bot": "9af9f5e6a558987d",
         "haserroroutput": false,
         "outputs": 1,
-        "x": 1380,
-        "y": 140,
+        "x": 860,
+        "y": 200,
         "wires": [
             []
         ]
@@ -150,8 +150,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 480,
-        "y": 160,
+        "x": 340,
+        "y": 180,
         "wires": [
             [
                 "853c9ce6261dc144"
@@ -171,8 +171,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 460,
-        "y": 120,
+        "x": 340,
+        "y": 100,
         "wires": []
     },
     {
@@ -192,8 +192,8 @@
         "topic": "",
         "payload": "{\"msg\":{\"payload\":{\"content\":\"Elija mendrugo\",\"type\":\"message\",\"chatId\":203007605,\"options\":[[\"prueba\",\"mimi\"]]}}}",
         "payloadType": "json",
-        "x": 1210,
-        "y": 40,
+        "x": 690,
+        "y": 80,
         "wires": [
             [
                 "37e03dd8d78cb485"
@@ -444,8 +444,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1020,
-        "y": 80,
+        "x": 660,
+        "y": 140,
         "wires": []
     },
     {
@@ -595,25 +595,6 @@
         ]
     },
     {
-        "id": "13dbc394c7788c4c",
-        "type": "function",
-        "z": "6cbfdc66b09951e8",
-        "name": "Example remove keyboard",
-        "func": "\nlet response = {}\n\nlet definitiveFiles = []\n\nvar options = {\n    parse_mode: \"MarkdownV2\",\n    reply_markup: JSON.stringify({\n        keyboard: definitiveFiles,\n        remove_keyboard: true\n    })\n};\n\nresponse.payload = {\n    \"content\": \"*Prueba*\",\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId'),\n    \"options\": options\n}\n\nreturn response;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1460,
-        "y": 880,
-        "wires": [
-            [
-                "1c892d71830aefda"
-            ]
-        ]
-    },
-    {
         "id": "bdaf392f34f30afc",
         "type": "telegram sender",
         "z": "6cbfdc66b09951e8",
@@ -657,20 +638,6 @@
         "bot": "9af9f5e6a558987d",
         "x": 880,
         "y": 820,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "1c892d71830aefda",
-        "type": "telegram sender",
-        "z": "6cbfdc66b09951e8",
-        "name": "Empty Keyboard",
-        "bot": "9af9f5e6a558987d",
-        "haserroroutput": false,
-        "outputs": 1,
-        "x": 1690,
-        "y": 880,
         "wires": [
             []
         ]
