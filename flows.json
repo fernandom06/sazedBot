@@ -383,7 +383,7 @@
         "type": "function",
         "z": "6cbfdc66b09951e8",
         "name": "Correct exit",
-        "func": "let response = {}\nlet filename = flow.get('filename')\n\nlet options = {\n    parse_mode: \"MarkdownV2\"\n}\n\nresponse.payload = {\n    \"content\": \"La placa *\"+ filename +\"* ha sido grabada correctamente\",\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId'),\n    \"options\": options\n}\n\nreturn response;",
+        "func": "let response = {}\nlet filename = flow.get('filename')\n\nlet options = {\n    parse_mode: \"MarkdownV2\"\n}\n\nresponse.payload = {\n    \"content\": \"La placa *\" + filename +\"* ha sido grabada correctamente\",\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId'),\n    \"options\": options\n}\n\nreturn response;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -676,21 +676,11 @@
         ]
     },
     {
-        "id": "be1e7f01392847ac",
-        "type": "comment",
-        "z": "6cbfdc66b09951e8",
-        "name": "ReplyForce y Keyboard",
-        "info": "No se pueden hacer un mensaje que fuerce la respuesta y monte un keyboard, hay que ver opciones, dos mensajes con texto, un mensaje con texto tonto y despues editarlo o algo asi",
-        "x": 1340,
-        "y": 540,
-        "wires": []
-    },
-    {
         "id": "536fbb5712e225cc",
         "type": "function",
         "z": "6cbfdc66b09951e8",
         "name": "Downloading response",
-        "func": "flow.set('filename', msg.payload.content)\nlet filename = msg.payload.content;\nlet content = \"Grabando la placa *\" + filename + \"*\";\nlet response = {}\nlet options = {\n    parse_mode: \"MarkdownV2\",\n}\n\nresponse.payload = {\n    \"content\": content,\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId'),\n    \"options\": options\n}\n\nreturn response;",
+        "func": "let filename = msg.payload.content;\nlet sanitizeFilename = filename.replace(/([^\\w\\s])/g, '\\\\$1');\nlet content = \"Grabando la placa *\" + sanitizeFilename + \"*\";\nflow.set('filename', sanitizeFilename)\nlet response = {}\nlet options = {\n    parse_mode: \"MarkdownV2\",\n}\n\nresponse.payload = {\n    \"content\": content,\n    \"type\": \"message\",\n    \"chatId\": flow.get('chatId'),\n    \"options\": options\n}\n\nreturn response;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
